@@ -7,13 +7,13 @@ import java.util.Random;
 public class Hero extends Character implements SpecialAbility {
 
     private int mana;
-    private int healthPoitons;
+    private int healthPotions;
     private int victories;
 
     public Hero(String name, int healthPoints, int defense, int mana, int attack) {
         super(name, healthPoints, defense, attack);
         this.mana = mana;
-        this.healthPoitons = 1;
+        this.healthPotions = 1;
         this.victories = 0;
     }
 
@@ -25,12 +25,12 @@ public class Hero extends Character implements SpecialAbility {
         this.mana = mana;
     }
 
-    public int getHealthPoitons() {
-        return healthPoitons;
+    public int getHealthPotions() {
+        return healthPotions;
     }
 
-    public void setHealthPoitons(int healthPoitons) {
-        this.healthPoitons = healthPoitons;
+    public void setHealthPotions(int healthPotions) {
+        this.healthPotions = healthPotions;
     }
 
     public int getVictories() {
@@ -56,8 +56,7 @@ public class Hero extends Character implements SpecialAbility {
 
     @Override
     public String toString() {
-
-        return "Hero: " + super.toString() + " | victories: " + victories + " | mana: " + mana + " | poitons: " + healthPoitons;
+        return "Hero: " + super.toString() + " | victories: " + victories + " | mana: " + mana + " | poitons: " + healthPotions;
     }
 
 }

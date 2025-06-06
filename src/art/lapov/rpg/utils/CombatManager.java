@@ -6,7 +6,6 @@ import art.lapov.rpg.characters.Goblin;
 import art.lapov.rpg.characters.Hero;
 import art.lapov.rpg.characters.Troll;
 import art.lapov.rpg.enums.HeroActions;
-import art.lapov.rpg.exceptions.HeroOutOfRangeException;
 
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -76,8 +75,13 @@ public class CombatManager {
                 hero.useSpecialAbility(enemy);
             }
             case POTION -> {
-                hero.setHealthPoitons(0);
-                hero.setHealthPoints(hero.getHealthPoints() + this.random.nextInt(21));
+                hero.setHealthPotions(hero.getHealthPotions() - 1);
+                if (hero.getHealthPotions() >= 0) {
+                    hero.setHealthPoints(hero.getHealthPoints() + this.random.nextInt(21));
+                } else {
+                    hero.setHealthPotions(0);
+                    System.out.println("No cheating!!! You don't have enough potions. You're missing a move.");
+                }
             }
             default -> {
                 System.out.println("You missed the action ✺◟( • ω • )◞✺ Prepare to attack.");
