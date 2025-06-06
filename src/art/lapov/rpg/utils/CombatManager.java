@@ -7,6 +7,10 @@ import art.lapov.rpg.characters.Hero;
 import art.lapov.rpg.characters.Troll;
 import art.lapov.rpg.enums.HeroActions;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -119,8 +123,17 @@ public class CombatManager {
 
     //    Saving the result to a file
     public static void saveGameResults(Hero hero) {
-        // Realize writing to a file
-        System.out.println("Realize writing to a file");
+        // Создаём FileWriter во «втором» конструкторе: true = append
+        try (BufferedWriter writer =
+                     new BufferedWriter(new FileWriter("scores.txt", true))) {
+            String line = LocalDateTime.now() + " | " + hero.getName() + " defeated " + hero.getVictories() + (((hero.getVictories() > 1 || hero.getVictories() == 0) ? " enemies" : " enemy"));
+            writer.write(line);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error writing to file.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Random getRandom() {

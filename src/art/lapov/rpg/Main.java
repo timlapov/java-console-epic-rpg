@@ -77,7 +77,7 @@ public class Main {
 
         }
 
-        System.out.println("Goodbye!");
+        System.out.println("You're dead .｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡. Goodbye!");
         System.out.println(hero.getVictories());
 
         try {
