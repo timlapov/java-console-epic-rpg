@@ -5,10 +5,12 @@ import art.lapov.rpg.interfaces.SpecialAbility;
 public class Hero extends Character implements SpecialAbility {
 
     private int mana;
+    private int healthPoitons;
 
     public Hero(String name, int healthPoints, int defense, int mana, int attack) {
         super(name, healthPoints, defense, attack);
         this.mana = mana;
+        this.healthPoitons = 0;
     }
 
     @Override
@@ -24,10 +26,18 @@ public class Hero extends Character implements SpecialAbility {
         this.mana = mana;
     }
 
+    public int getHealthPoitons() {
+        return healthPoitons;
+    }
+
+    public void setHealthPoitons(int healthPoitons) {
+        this.healthPoitons = healthPoitons;
+    }
+
     @Override
     public String toString() {
 
-        return "Hero{" + super.toString() + " | mana: " + mana + '}';
+        return "Hero{ " + super.toString() + " | mana: " + mana + " | poitons: " + healthPoitons + " }";
     }
 
 }
