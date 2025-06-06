@@ -65,7 +65,7 @@ public class Main {
             Enemy enemy = combatManager.createEnemy();
             System.out.println("Your new enemy: \n" + enemy);
 
-            while (enemy.isAlive()) {
+            while (enemy.isAlive() && hero.isAlive()) {
                 HeroActions action = combatManager.askHeroAboutAction();
                 combatManager.userActionProcessing(action, hero, enemy);
                 if (enemy.isAlive()) {
