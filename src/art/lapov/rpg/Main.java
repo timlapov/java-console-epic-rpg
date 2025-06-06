@@ -57,18 +57,18 @@ public class Main {
         System.out.println("The game is on!");
 
         CombatManager combatManager = new CombatManager();
-        combatManager.askHeroAboutAction();
         Hero hero = combatManager.createHero(name, characterChoice);
 
-//        while (hero.isAlive()) {
-//            Enemy enemy = combatManager.createEnemy();
-//
-//            while (enemy.isAlive()) {
-//                HeroActions action = combatManager.askHeroAboutAction();
-//            }
-//            combatManager.showGameInfo(hero, enemy);
-//
-//        }
+        while (hero.isAlive()) {
+            Enemy enemy = combatManager.createEnemy();
+            System.out.println("Your new enemy: \n" + enemy);
+            while (enemy.isAlive()) {
+                HeroActions action = combatManager.askHeroAboutAction();
+                combatManager.userActionProcessing(action, hero, enemy);
+            }
+            combatManager.showGameInfo(hero, enemy);
+
+        }
 
         try {
             combatManager.saveGameResults(hero);

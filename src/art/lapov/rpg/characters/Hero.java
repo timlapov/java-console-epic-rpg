@@ -2,6 +2,8 @@ package art.lapov.rpg.characters;
 
 import art.lapov.rpg.interfaces.SpecialAbility;
 
+import java.util.Random;
+
 public class Hero extends Character implements SpecialAbility {
 
     private int mana;
@@ -13,11 +15,6 @@ public class Hero extends Character implements SpecialAbility {
         this.mana = mana;
         this.healthPoitons = 1;
         this.victories = 0;
-    }
-
-    @Override
-    public void useSpecialAbility(java.lang.Character target) {
-
     }
 
     public int getMana() {
@@ -42,6 +39,15 @@ public class Hero extends Character implements SpecialAbility {
 
     public void setVictories(int victories) {
         this.victories = victories;
+    }
+
+    @Override
+    public void useSpecialAbility(Character target) {
+        this.mana -= 10;
+        int random = new Random().nextInt(2);
+        int increasedDamage = this.getAttack() * (random + 2);
+        target.takeDamage(increasedDamage);
+        System.out.println("You attacked with a fireball of damage: " + increasedDamage);
     }
 
     @Override

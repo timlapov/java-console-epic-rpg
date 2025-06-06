@@ -61,9 +61,30 @@ public class CombatManager {
 //    Handling the use of treatment
 //    Battle Summary
 
-    // Get poison
+    // Get poiton
+    public static int getPoiton() {
+        Random random = new Random();
+        return random.nextInt(18) + 2;
+    }
 
-    public HeroActions askHeroAboutAction() {
+    public void userActionProcessing(HeroActions action, Hero hero, Enemy enemy) {
+        switch (action) {
+            case ATTACK -> {
+                hero.attack(enemy);
+            }
+            case USE_SPECIAL_ABILITY -> {
+
+            }
+            case POTION -> {
+
+            }
+            default -> {
+
+            }
+        }
+    }
+
+    public static HeroActions askHeroAboutAction() {
         System.out.println("Make your choice");
         HeroActions[] actions = HeroActions.values();
         for (int i = 0; i < actions.length; i++) {
