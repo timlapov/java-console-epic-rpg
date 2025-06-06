@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 public class CombatManager {
 
+    private final Random random = new Random();
+
     //Create a hero
     public static Hero createHero(String name, int choice) {
         switch (choice) {
@@ -31,9 +33,8 @@ public class CombatManager {
     }
 
     // Create an enemy
-    public static Enemy createEnemy() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(3);
+    public Enemy createEnemy() {
+        int randomNumber = this.random.nextInt(3);
 
         switch (randomNumber) {
             case 1 -> {
@@ -62,9 +63,8 @@ public class CombatManager {
 //    Battle Summary
 
     // Get poiton
-    public static int getPoiton() {
-        Random random = new Random();
-        return random.nextInt(18) + 2;
+    public int getPoiton() {
+        return this.random.nextInt(18) + 2;
     }
 
     public void userActionProcessing(HeroActions action, Hero hero, Enemy enemy) {
@@ -73,19 +73,20 @@ public class CombatManager {
                 hero.attack(enemy);
             }
             case USE_SPECIAL_ABILITY -> {
-
+                hero.useSpecialAbility(enemy);
             }
             case POTION -> {
-
+                hero.setHealthPoitons(0);
+                hero.setHealthPoints(hero.getHealthPoints() + this.random.nextInt(21));
             }
             default -> {
-
+                System.out.println("You missed the action ✺◟( • ω • )◞✺ Prepare to attack.");
             }
         }
     }
 
     public static HeroActions askHeroAboutAction() {
-        System.out.println("Make your choice");
+        System.out.println("\nMake your choice");
         HeroActions[] actions = HeroActions.values();
         for (int i = 0; i < actions.length; i++) {
             System.out.println((i + 1) + ". " + actions[i].getDisplayName());
@@ -118,4 +119,7 @@ public class CombatManager {
         System.out.println("Realize writing to a file");
     }
 
+    public Random getRandom() {
+        return random;
+    }
 }

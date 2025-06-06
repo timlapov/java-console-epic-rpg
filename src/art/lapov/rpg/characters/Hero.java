@@ -43,11 +43,15 @@ public class Hero extends Character implements SpecialAbility {
 
     @Override
     public void useSpecialAbility(Character target) {
-        this.mana -= 10;
-        int random = new Random().nextInt(2);
-        int increasedDamage = this.getAttack() * (random + 2);
-        target.takeDamage(increasedDamage);
-        System.out.println("You attacked with a fireball of damage: " + increasedDamage);
+        if (mana >= 10 ) {
+            this.mana -= 10;
+            int random = new Random().nextInt(2);
+            int increasedDamage = this.getAttack() * (random + 2);
+            System.out.println("You attacked with a fireball of damage: " + increasedDamage);
+            target.takeDamage(increasedDamage);
+        } else {
+            System.out.println("No cheating!!! You don't have enough mana. You're missing a move.");
+        }
     }
 
     @Override

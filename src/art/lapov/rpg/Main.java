@@ -42,7 +42,7 @@ public class Main {
 
         while (true) {
             try {
-                System.out.println("Enter the character's number:");
+                System.out.println("Choose your character:");
                 characterChoice = sc.nextInt();
                 checkHeroRange(characterChoice);
                 break;
@@ -54,21 +54,31 @@ public class Main {
             }
         }
 
-        System.out.println("The game is on!");
-
         CombatManager combatManager = new CombatManager();
         Hero hero = combatManager.createHero(name, characterChoice);
+        System.out.println("Hero has been created.");
+        System.out.println(hero);
+
+        System.out.println("\nThe game is on! (˙ω˙)\uD83C\uDFAE(˙∀˙)\uD83C\uDFAE \n");
 
         while (hero.isAlive()) {
             Enemy enemy = combatManager.createEnemy();
             System.out.println("Your new enemy: \n" + enemy);
+
             while (enemy.isAlive()) {
                 HeroActions action = combatManager.askHeroAboutAction();
                 combatManager.userActionProcessing(action, hero, enemy);
+                if (enemy.isAlive()) {
+                    enemy.attack(hero);
+                }
+
+                combatManager.showGameInfo(hero, enemy);
             }
-            combatManager.showGameInfo(hero, enemy);
 
         }
+
+        System.out.println("Goodbye!");
+        System.out.println(hero.getVictories());
 
         try {
             combatManager.saveGameResults(hero);
