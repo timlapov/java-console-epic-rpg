@@ -1,12 +1,20 @@
 package art.lapov.rpg;
 
 import art.lapov.rpg.characters.Hero;
+import art.lapov.rpg.exceptions.HeroOutOfRangeException;
 import art.lapov.rpg.utils.CombatManager;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
+    public static void checkHeroRange(int choice) throws HeroOutOfRangeException {
+        if (choice < 1 || choice > 3) {
+            throw new HeroOutOfRangeException("You can choose a character from the three presented");
+        }
+    }
+
     public static void main(String[] args) {
 
         System.out.println("\nWelcome to our epic RPG (*・ω・)ﾉ");
@@ -22,7 +30,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Invalid character name. Please try again." + e);
         }
-        System.out.println("Please select your character");
+        System.out.println("Hello, " + name);
         System.out.println("""
                 1. ( ´-ω･)︻┻┳══━一
                 2. (ノ ˘_˘)ノ　ζ|||ζ　ζ|||ζ　ζ|||ζ
@@ -32,11 +40,15 @@ public class Main {
 
         while (true) {
             try {
+                System.out.println("Enter the character's number:");
                 characterChoice = sc.nextInt();
+                checkHeroRange(characterChoice);
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid number. Please try again." + e);
                 sc.nextLine();
+            } catch (HeroOutOfRangeException e) {
+                System.out.println(e.getMessage());
             }
         }
 
