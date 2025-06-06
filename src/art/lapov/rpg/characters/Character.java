@@ -4,7 +4,6 @@ public abstract class Character {
     private String name;
     private int healthPoints;
     private int defense;
-    private int victories;
     private int attack;
 
     public Character(String name, int healthPoints, int defense, int attack) {
@@ -12,7 +11,6 @@ public abstract class Character {
         this.healthPoints = healthPoints;
         this.defense = defense;
         this.attack = attack;
-        this.victories = 0;
     }
 
     public void attack(Character target) {
@@ -71,6 +69,6 @@ public abstract class Character {
 
     @Override
     public String toString() {
-        return name + " | victories: " + victories + " | HP: " + healthPoints + " | defense: " + defense + " | attack: " + attack;
+        return name + " | HP: " + healthPoints + " | defense: " + defense + " | attack: " + attack;
     }
 }

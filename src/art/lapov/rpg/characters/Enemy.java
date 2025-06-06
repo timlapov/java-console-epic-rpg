@@ -8,6 +8,6 @@ public class Enemy extends Character {
 
     @Override
     public String toString() {
-        return "Enemy{ " + super.toString() + " }";
+        return "Enemy: " + super.toString();
     }
 }

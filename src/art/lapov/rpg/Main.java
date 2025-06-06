@@ -1,6 +1,8 @@
 package art.lapov.rpg;
 
+import art.lapov.rpg.characters.Enemy;
 import art.lapov.rpg.characters.Hero;
+import art.lapov.rpg.enums.HeroActions;
 import art.lapov.rpg.exceptions.HeroOutOfRangeException;
 import art.lapov.rpg.utils.CombatManager;
 
@@ -52,16 +54,27 @@ public class Main {
             }
         }
 
+        System.out.println("The game is on!");
+
         CombatManager combatManager = new CombatManager();
+        combatManager.askHeroAboutAction();
         Hero hero = combatManager.createHero(name, characterChoice);
 
-        System.out.println(hero.toString());
+//        while (hero.isAlive()) {
+//            Enemy enemy = combatManager.createEnemy();
+//
+//            while (enemy.isAlive()) {
+//                HeroActions action = combatManager.askHeroAboutAction();
+//            }
+//            combatManager.showGameInfo(hero, enemy);
+//
+//        }
 
-
-
-
-
-
+        try {
+            combatManager.saveGameResults(hero);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         sc.close();
     }
