@@ -64,18 +64,15 @@ public class Main {
 // Combat loop
         while (hero.isAlive()) {
             Enemy enemy = combatManager.createEnemy();
-            hero.setHealthPotions(1);           // 1 potion per fight
             System.out.println("Your new enemy:\n" + enemy);
-
             while (enemy.isAlive() && hero.isAlive()) {
                 HeroActions action = CombatManager.askHeroAboutAction();
                 combatManager.userActionProcessing(action, hero, enemy);
                 if (enemy.isAlive()) enemy.attack(hero);
-
                 CombatManager.showGameInfo(hero, enemy);
             }
             if (hero.isAlive()) {                      // the hero survived - he won
-                hero.setVictories(hero.getVictories() + 1);
+                hero.addVictory();
             }
         }
 

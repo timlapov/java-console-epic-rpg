@@ -54,6 +54,15 @@ public class Hero extends Character implements SpecialAbility {
         return true;
     }
 
+    public void addVictory() {
+        victories++;
+        // Get a new potion after each victory
+        healthPotions++;
+        // Restore some mana
+        mana += 3;
+        System.out.println("Victory! You now have " + victories + " victories and gained a health potion!");
+    }
+
     @Override
     public void useSpecialAbility(Character target) {
         if (mana >= 10 ) {
