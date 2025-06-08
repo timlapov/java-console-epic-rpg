@@ -55,7 +55,7 @@ public class Main {
             
             // Battle loop between hero and current enemy
             while (enemy.isAlive() && hero.isAlive()) {
-                HeroActions action = combatManager.askHeroAboutAction();
+                HeroActions action = combatManager.askHeroAboutAction(sc);
                 combatManager.heroActionProcessing(action, hero, enemy);
                 if (enemy.isAlive()) enemy.attack(hero);
                 combatManager.showGameInfo(hero, enemy);

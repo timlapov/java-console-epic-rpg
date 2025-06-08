@@ -22,7 +22,7 @@ import java.util.Scanner;
 public class CombatManager {
 
     // Random number generator for various game mechanics
-    private final Random random = new Random();
+    private static final Random random = new Random();
 
     /**
      * Factory method to create a hero based on character class choice.
@@ -97,7 +97,7 @@ public class CombatManager {
      * Prompts the player to choose an action and handles input validation.
      * @return The selected HeroAction
      */
-    public HeroActions askHeroAboutAction() {
+    public HeroActions askHeroAboutAction(Scanner sc) {
         System.out.println("\n🎯 Choose your action:");
         HeroActions[] actions = HeroActions.values();
         
@@ -105,8 +105,6 @@ public class CombatManager {
         for (int i = 0; i < actions.length; i++) {
             System.out.println((i + 1) + ". " + actions[i].getDisplayName());
         }
-
-        Scanner sc = new Scanner(System.in);
 
         // Input validation loop
         while (true) {
