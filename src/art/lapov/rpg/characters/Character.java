@@ -69,6 +69,6 @@ public abstract class Character {
 
     @Override
     public String toString() {
-        return name + " | HP: " + healthPoints + " | defense: " + defense + " | attack: " + attack;
+        return name + "  ♥️" + healthPoints + "  🛡️" + defense + "  🗡️" + attack;
     }
 }

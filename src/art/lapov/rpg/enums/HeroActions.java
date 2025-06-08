@@ -1,10 +1,10 @@
 package art.lapov.rpg.enums;
 
 public enum HeroActions {
-    ATTACK("Attack ( ・∀・)・・・--------☆"),
-    POTION("Take your medicine ( ˘▽˘)っ♨"),
-    USE_SPECIAL_ABILITY("Use special ability (⊃｡•́‿•̀｡)⊃━✿✿✿✿✿✿"),
-    SKIP("Skip ▓▒░(°◡°)░▒▓"),;
+    ATTACK("🗡️ Attack"),
+    POTION("🧪 Take your medicine"),
+    USE_SPECIAL_ABILITY("✨Use special ability"),
+    SKIP("☮️ Skip"),;
 
     private final String displayName;
 

@@ -78,7 +78,7 @@ public class Hero extends Character implements SpecialAbility {
 
     @Override
     public String toString() {
-        return "Hero: " + super.toString() + " | victories: " + victories + " | mana: " + mana + " | poitons: " + healthPotions;
+        return "Hero: " + super.toString() + "  ✨" + mana + "  🧪" + healthPotions + "  🏆" + victories;
     }
 
 }

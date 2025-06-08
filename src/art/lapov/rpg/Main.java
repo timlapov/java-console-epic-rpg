@@ -19,7 +19,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("\nWelcome to our epic RPG (*・ω・)ﾉ");
+        System.out.println("🎮 Welcome to Epic Console RPG! 🎮");
+        System.out.println("=".repeat(50));
 
         System.out.println("Choose a character and name to begin. Different characters have different starting characteristics.");
 
@@ -34,9 +35,9 @@ public class Main {
         }
         System.out.println("Hello, " + name);
         System.out.println("""
-                1. ( ´-ω･)︻┻┳══━一
-                2. (ノ ˘_˘)ノ　ζ|||ζ　ζ|||ζ　ζ|||ζ
-                3. (◕‿◕✿)
+                1. 🗡️ Warrior – strong and durable fighter
+                2. 🧙 Mage – Powerful magic user
+                3. 🥷 Ninja – Fast and balanced
                 """);
         int characterChoice;
 
@@ -47,7 +48,7 @@ public class Main {
                 checkHeroRange(characterChoice);
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid number. Please try again." + e);
+                System.out.println("❌ Invalid number. Please try again." + e);
                 sc.nextLine();
             } catch (HeroOutOfRangeException e) {
                 System.out.println(e.getMessage());
@@ -56,13 +57,19 @@ public class Main {
 
         CombatManager combatManager = new CombatManager();
         Hero hero = combatManager.createHero(name, characterChoice);
-        System.out.println("Hero has been created.");
+        System.out.println("\n🎉 Hero created successfully!");
         System.out.println(hero);
 
-        System.out.println("\nThe game is on! (˙ω˙)\uD83C\uDFAE(˙∀˙)\uD83C\uDFAE \n");
+        System.out.println("\n🚀 The adventure begins!");
 
 // Combat loop
         while (hero.isAlive()) {
+            System.out.println("\n🔄 Preparing for next battle...");
+            try {
+                Thread.sleep(1500); // 1,5 second pause for easy reading
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
             Enemy enemy = combatManager.createEnemy();
             System.out.println("Your new enemy:\n" + enemy);
             while (enemy.isAlive() && hero.isAlive()) {
@@ -76,7 +83,7 @@ public class Main {
             }
         }
 
-        System.out.println("You're dead .｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡. Goodbye!");
+        System.out.println("You're dead ☠️ Goodbye!");
 
         try {
             combatManager.saveGameResults(hero);
