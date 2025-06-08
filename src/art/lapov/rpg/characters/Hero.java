@@ -60,6 +60,7 @@ public class Hero extends Character implements SpecialAbility {
     public void useHealthPotion() {
         if (healthPotions <= 0) {
             System.out.println("⏭️ No health potions available! You skip your turn.");
+            return;
         }
         healthPotions--;
         Random random = new Random();
@@ -76,7 +77,7 @@ public class Hero extends Character implements SpecialAbility {
         victories++;
         healthPotions++;  // Reward: gain a health potion
         mana += 5;        // Reward: restore some mana
-        System.out.println("Victory! You now have " + victories + "🏆 victories and gained a health potion!");
+        System.out.println("Victory! You now have " + victories + "🏆 and gained a health potion!");
     }
 
     /**
