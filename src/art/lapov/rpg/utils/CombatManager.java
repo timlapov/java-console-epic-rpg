@@ -74,7 +74,7 @@ public class CombatManager {
         System.out.println("=".repeat(50));
         System.out.println(hero);
         System.out.println("🔻 VS 🔻");
-        System.out.println(enemy);
+        System.out.println(enemy + " (enemy #" + (hero.getVictories() + 1) + ")");
         System.out.println("=".repeat(50));
     }
 
