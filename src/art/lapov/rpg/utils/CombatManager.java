@@ -32,7 +32,6 @@ public class CombatManager {
                 return new Hero(name, 90, 5, 20, 20);
             }
         }
-
     }
 
     // Create an enemy
