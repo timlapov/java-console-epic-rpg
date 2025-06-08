@@ -31,7 +31,7 @@ public abstract class Character {
         }
     }
 
-    public Boolean isAlive() {
+    public boolean isAlive() {
         return (healthPoints) > 0;
     }
 

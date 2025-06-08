@@ -65,31 +65,17 @@ public class CombatManager {
 //    Handling the use of treatment
 //    Battle Summary
 
-    // Get poiton
-    public int getPoiton() {
+    // Get potion
+    public int getPotion() {
         return this.random.nextInt(18) + 2;
     }
 
     public void userActionProcessing(HeroActions action, Hero hero, Enemy enemy) {
         switch (action) {
-            case ATTACK -> {
-                hero.attack(enemy);
-            }
-            case USE_SPECIAL_ABILITY -> {
-                hero.useSpecialAbility(enemy);
-            }
-            case POTION -> {
-                hero.setHealthPotions(hero.getHealthPotions() - 1);
-                if (hero.getHealthPotions() >= 0) {
-                    hero.setHealthPoints(hero.getHealthPoints() + this.random.nextInt(21));
-                } else {
-                    hero.setHealthPotions(0);
-                    System.out.println("No cheating!!! You don't have enough potions. You're missing a move.");
-                }
-            }
-            default -> {
-                System.out.println("You missed the action ✺◟( • ω • )◞✺ Prepare to attack.");
-            }
+            case ATTACK -> hero.attack(enemy);
+            case USE_SPECIAL_ABILITY -> hero.useSpecialAbility(enemy);
+            case POTION -> hero.useHealthPotion();
+            default -> System.out.println("You missed the action ✺◟( • ω • )◞✺ Prepare to attack.");
         }
     }
 

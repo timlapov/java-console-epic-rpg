@@ -61,24 +61,25 @@ public class Main {
 
         System.out.println("\nThe game is on! (˙ω˙)\uD83C\uDFAE(˙∀˙)\uD83C\uDFAE \n");
 
+// Combat loop
         while (hero.isAlive()) {
             Enemy enemy = combatManager.createEnemy();
-            System.out.println("Your new enemy: \n" + enemy);
+            hero.setHealthPotions(1);           // 1 potion per fight
+            System.out.println("Your new enemy:\n" + enemy);
 
             while (enemy.isAlive() && hero.isAlive()) {
-                HeroActions action = combatManager.askHeroAboutAction();
+                HeroActions action = CombatManager.askHeroAboutAction();
                 combatManager.userActionProcessing(action, hero, enemy);
-                if (enemy.isAlive()) {
-                    enemy.attack(hero);
-                }
+                if (enemy.isAlive()) enemy.attack(hero);
 
-                combatManager.showGameInfo(hero, enemy);
+                CombatManager.showGameInfo(hero, enemy);
             }
-
+            if (hero.isAlive()) {                      // the hero survived - he won
+                hero.setVictories(hero.getVictories() + 1);
+            }
         }
 
         System.out.println("You're dead .｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡. Goodbye!");
-        System.out.println(hero.getVictories());
 
         try {
             combatManager.saveGameResults(hero);

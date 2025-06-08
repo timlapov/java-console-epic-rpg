@@ -41,6 +41,19 @@ public class Hero extends Character implements SpecialAbility {
         this.victories = victories;
     }
 
+    public boolean useHealthPotion() {
+        if (healthPotions <= 0) {
+            System.out.println("No health potions available! You skip your turn.");
+            return false;
+        }
+
+        healthPotions--;
+        Random random = new Random();
+        int healAmount = random.nextInt(21) + 5; // 10-25 HP healing
+        this.setHealthPoints(getHealthPoints() + healAmount);
+        return true;
+    }
+
     @Override
     public void useSpecialAbility(Character target) {
         if (mana >= 10 ) {
