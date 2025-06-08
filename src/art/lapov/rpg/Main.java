@@ -9,10 +9,19 @@ import art.lapov.rpg.utils.CombatManager;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Main class that serves as the entry point for the Epic Console RPG game.
+ * Handles the game initialization, main game loop, and user interactions.
+ */
 public class Main {
 
+    // Scanner for reading user input throughout the game
     private static final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Main method that initializes and runs the Epic Console RPG game.
+     * Manages the complete game flow from character creation to game end.
+     */
     public static void main(String[] args) {
 
         System.out.println("🎮 Welcome to Epic Console RPG! 🎮");
@@ -20,7 +29,7 @@ public class Main {
 
         System.out.println("Choose a character and name to begin. Different characters have different starting characteristics.");
 
-        // It is necessary to request all the necessary data to start the game
+        // Initialize game components and create hero character
         String name = getHeroName();
         int characterChoice = heroSelectionRequest();
 
@@ -31,27 +40,34 @@ public class Main {
 
         System.out.println("\n🚀 The adventure begins!");
 
-        // Combat loop
+        // Main combat loop - continues until hero dies
         while (hero.isAlive()) {
             System.out.println("\n🔄 Preparing for next battle...\n");
             try {
-                Thread.sleep(1500); // 1,5 second pause for easy reading (UX)
+                Thread.sleep(1500); // Brief pause for better user experience
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+            
+            // Generate new enemy and start battle
             Enemy enemy = combatManager.createEnemy();
             System.out.println("Your new " + enemy);
+            
+            // Battle loop between hero and current enemy
             while (enemy.isAlive() && hero.isAlive()) {
                 HeroActions action = combatManager.askHeroAboutAction();
-                combatManager.userActionProcessing(action, hero, enemy);
+                combatManager.heroActionProcessing(action, hero, enemy);
                 if (enemy.isAlive()) enemy.attack(hero);
                 combatManager.showGameInfo(hero, enemy);
             }
-            if (hero.isAlive()) {                      // the hero survived - he won
+            
+            // Award victory if hero survived the battle
+            if (hero.isAlive()) {
                 hero.addVictory();
             }
         }
 
+        // Display final results and save to file
         combatManager.displayGameResults(hero);
 
         try {
@@ -63,12 +79,21 @@ public class Main {
         sc.close();
     }
 
+    /**
+     * Validates that the hero selection is within the allowed range (1-3).
+     * @param choice The character choice number to validate
+     * @throws HeroOutOfRangeException if choice is not between 1 and 3
+     */
     public static void checkHeroRange(int choice) throws HeroOutOfRangeException {
         if (choice < 1 || choice > 3) {
             throw new HeroOutOfRangeException("You can choose a character from the three presented");
         }
     }
 
+    /**
+     * Prompts the user to enter their hero's name with input validation.
+     * @return A valid, non-empty hero name
+     */
     private static String getHeroName() {
         System.out.print("\n🏷️ Enter your hero's name: ");
         String name = "";
@@ -79,6 +104,7 @@ public class Main {
             sc.nextLine();
         }
 
+        // Ensure name is not empty
         while (name.isEmpty()) {
             System.out.print("❌ Name cannot be empty! Please enter a valid name: ");
             name = sc.nextLine().trim();
@@ -88,6 +114,10 @@ public class Main {
         return name;
     }
 
+    /**
+     * Displays character options and handles user selection with input validation.
+     * @return The selected character choice (1=Warrior, 2=Mage, 3=Ninja)
+     */
     public static int heroSelectionRequest() {
         System.out.println("""
                 1. 🗡️ Warrior – strong and durable fighter

@@ -4,17 +4,29 @@ import art.lapov.rpg.interfaces.SpecialAbility;
 
 import java.util.Random;
 
+/**
+ * Hero class representing the player character with special abilities,
+ * mana system, health potions, and victory tracking.
+ */
 public class Hero extends Character implements SpecialAbility {
 
-    private int mana;
-    private int healthPotions;
-    private int victories;
+    private int mana;           // Magical energy used for special abilities
+    private int healthPotions;  // Number of healing potions available
+    private int victories;      // Count of defeated enemies
 
+    /**
+     * Constructor for creating a new hero with specified stats.
+     * @param name Hero's name
+     * @param healthPoints Starting health points
+     * @param defense Defense rating
+     * @param mana Starting mana points
+     * @param attack Attack power
+     */
     public Hero(String name, int healthPoints, int defense, int mana, int attack) {
         super(name, healthPoints, defense, attack);
         this.mana = mana;
-        this.healthPotions = 1;
-        this.victories = 0;
+        this.healthPotions = 1;  // Start with one health potion
+        this.victories = 0;      // Start with no victories
     }
 
     public int getMana() {
@@ -41,38 +53,47 @@ public class Hero extends Character implements SpecialAbility {
         this.victories = victories;
     }
 
-    public boolean useHealthPotion() {
+    /**
+     * Uses a health potion to restore health. Deducts one potion from inventory.
+     * Healing amount is random between 5-25 HP.
+     */
+    public void useHealthPotion() {
         if (healthPotions <= 0) {
-            System.out.println("No health potions available! You skip your turn.");
-            return false;
+            System.out.println("⏭️ No health potions available! You skip your turn.");
         }
-
         healthPotions--;
         Random random = new Random();
-        int healAmount = random.nextInt(21) + 5; // 10-25 HP healing
+        int healAmount = random.nextInt(21) + 5; // Random healing: 5-25 HP
+        System.out.println("+ " + healAmount + "♥️");
         this.setHealthPoints(getHealthPoints() + healAmount);
-        return true;
     }
 
+    /**
+     * Increments victory count and provides rewards for defeating an enemy.
+     * Rewards include: +1 health potion and +5 mana restoration.
+     */
     public void addVictory() {
         victories++;
-        // Get a new potion after each victory
-        healthPotions++;
-        // Restore some mana
-        mana += 3;
-        System.out.println("Victory! You now have " + victories + " victories and gained a health potion!");
+        healthPotions++;  // Reward: gain a health potion
+        mana += 5;        // Reward: restore some mana
+        System.out.println("Victory! You now have " + victories + "🏆 victories and gained a health potion!");
     }
 
+    /**
+     * Uses the hero's special ability - a powerful fireball attack.
+     * Costs 10 mana and deals 2-3x normal attack damage.
+     * @param target The character to attack with the special ability
+     */
     @Override
     public void useSpecialAbility(Character target) {
         if (mana >= 10 ) {
-            this.mana -= 10;
+            this.mana -= 10; // Deduct mana cost
             int random = new Random().nextInt(2);
-            int increasedDamage = this.getAttack() * (random + 2);
+            int increasedDamage = this.getAttack() * (random + 2); // 2-3x damage multiplier
             System.out.println("🔥 You attacked with a fireball of damage: " + increasedDamage);
             target.takeDamage(increasedDamage);
             try {
-                Thread.sleep(1000); // 1 second pause for better UX
+                Thread.sleep(1000); // Brief pause for dramatic effect
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
