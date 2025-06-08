@@ -2,6 +2,6 @@ package art.lapov.rpg.characters;
 
 public class Goblin extends Enemy {
     public Goblin() {
-        super("Goblin", 55, 10, 10);
+        super("Goblin", 55, 10, 15);
     }
 }

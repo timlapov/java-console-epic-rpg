@@ -69,10 +69,15 @@ public class Hero extends Character implements SpecialAbility {
             this.mana -= 10;
             int random = new Random().nextInt(2);
             int increasedDamage = this.getAttack() * (random + 2);
-            System.out.println("You attacked with a fireball of damage: " + increasedDamage);
+            System.out.println("🔥 You attacked with a fireball of damage: " + increasedDamage);
             target.takeDamage(increasedDamage);
+            try {
+                Thread.sleep(1000); // 1 second pause for better UX
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         } else {
-            System.out.println("No cheating!!! You don't have enough mana. You're missing a move.");
+            System.out.println("🤬 No cheating!!! You don't have enough mana. You're missing a move.");
         }
     }
 

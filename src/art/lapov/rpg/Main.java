@@ -33,26 +33,26 @@ public class Main {
 
         // Combat loop
         while (hero.isAlive()) {
-            System.out.println("\n🔄 Preparing for next battle...");
+            System.out.println("\n🔄 Preparing for next battle...\n");
             try {
-                Thread.sleep(1500); // 1,5 second pause for easy reading
+                Thread.sleep(1500); // 1,5 second pause for easy reading (UX)
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
             Enemy enemy = combatManager.createEnemy();
-            System.out.println("Your new enemy:\n" + enemy);
+            System.out.println("Your new " + enemy);
             while (enemy.isAlive() && hero.isAlive()) {
-                HeroActions action = CombatManager.askHeroAboutAction();
+                HeroActions action = combatManager.askHeroAboutAction();
                 combatManager.userActionProcessing(action, hero, enemy);
                 if (enemy.isAlive()) enemy.attack(hero);
-                CombatManager.showGameInfo(hero, enemy);
+                combatManager.showGameInfo(hero, enemy);
             }
             if (hero.isAlive()) {                      // the hero survived - he won
                 hero.addVictory();
             }
         }
 
-        System.out.println("You're dead ☠️ Goodbye!");
+        combatManager.displayGameResults(hero);
 
         try {
             combatManager.saveGameResults(hero);

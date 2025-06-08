@@ -16,6 +16,11 @@ public abstract class Character {
     public void attack(Character target) {
         System.out.println(name + " attacks " + target.getName() + "!");
         target.takeDamage(attack);
+        try {
+            Thread.sleep(1000); // 1 second pause for better UX
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void takeDamage(int damage) {
@@ -27,7 +32,7 @@ public abstract class Character {
         System.out.println(name + " takes " + effectiveDamage + " damage! Remaining HP: " + healthPoints);
 
         if (healthPoints <= 0) {
-            System.out.println(name + " has been defeated!");
+            System.out.println("😵 " + name + " has been defeated");
         }
     }
 
