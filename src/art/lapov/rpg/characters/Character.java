@@ -52,6 +52,7 @@ public abstract class Character {
         System.out.println(name + " takes " + effectiveDamage + " damage! Remaining HP: " + healthPoints);
 
         if (healthPoints <= 0) {
+            healthPoints = 0;
             System.out.println("😵 " + name + " has been defeated");
         }
     }
